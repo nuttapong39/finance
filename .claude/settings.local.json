@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -1 \"C:\\\\xampp\\\\htdocs\\\\finance\"/*.php)",
+      "Bash(grep \"\\\\.php$\")",
+      "Bash(grep -r \"TODO\\\\|FIXME\\\\|BUG\\\\|HACK\\\\|XXX\" C:xampphtdocsfinance --include=*.php --include=*.js --include=*.css)",
+      "Bash(grep -r \"echo\\\\|print\\\\|var_dump\" C:xampphtdocsfinance --include=*.php)",
+      "Bash(python3 -c \":*)",
+      "Bash(sed -i \"s|<div class=\"\"card-head\"\"><i class=\"\"bi bi-calendar3\"\"></i> รายงานประจำวัน</div>|<div class=\"\"card-head\"\"><span class=\"\"msi\"\">calendar_today</span> รายงานประจำวัน</div>|g\" daily.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-printer\"\"></i> พิมพ์รายงานประจำวัน|<span class=\"\"msi\"\">print</span> พิมพ์รายงานประจำวัน|g\" daily.php)",
+      "Bash(sed -i \"s|<span class=\"\"glyphicon glyphicon-file\"\"></span> ส่งออกรายงานประจำวัน Excel|<span class=\"\"msi\"\">table_chart</span> ส่งออกรายงานประจำวัน Excel|g\" daily.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-search\"\"></i> ค้นหารายการจ่ายเช็ค|<span class=\"\"msi\"\">search</span> ค้นหารายการจ่ายเช็ค|g\" paid.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-search\"\"></i> ค้นหา|<span class=\"\"msi\"\">search</span> ค้นหา|g\" paid.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-check-square\"\"></i> รายการรอตัดจ่ายเช็ค|<span class=\"\"msi\"\">task_alt</span> รายการรอตัดจ่ายเช็ค|g\" paid.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-info-circle\"\"></i> ไม่พบข้อมูล|<span class=\"\"msi\"\">info</span> ไม่พบข้อมูล|g\" paid.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-calendar3\"\"></i>|<span class=\"\"msi\"\">calendar_today</span>|g\" paid.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-search\"\"></i> ค้นหารายการจ่าย|<span class=\"\"msi\"\">search</span> ค้นหารายการจ่าย|g\" paidment.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-search\"\"></i> ค้นหา|<span class=\"\"msi\"\">search</span> ค้นหา|g\" paidment.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-credit-card\"\"></i> รายการบันทึกใบสำคัญจ่าย|<span class=\"\"msi\"\">credit_card</span> รายการบันทึกใบสำคัญจ่าย|g\" paidment.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-info-circle\"\"></i> ไม่พบข้อมูล|<span class=\"\"msi\"\">info</span> ไม่พบข้อมูล|g\" paidment.php)",
+      "Bash(sed -i \"s|<span class=\"\"glyphicon glyphicon-edit\"\"></span>|<span class=\"\"msi\"\">edit</span>|g\" paidment.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-search\"\"></i> ค้นหารายการจ่าย|<span class=\"\"msi\"\">search</span> ค้นหารายการจ่าย|g\" receive.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-search\"\"></i> ค้นหา|<span class=\"\"msi\"\">search</span> ค้นหา|g\" receive.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-inbox\"\"></i> รายการลงรับเอกสารการเงิน|<span class=\"\"msi\"\">inbox</span> รายการลงรับเอกสารการเงิน|g\" receive.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-inbox\"\"></i>|<span class=\"\"msi\"\">inbox</span>|g\" receive.php)",
+      "Bash(sed -i \"s|<i class=\"\"bi bi-info-circle\"\"></i> ลงรับเอกสาร|<span class=\"\"msi\"\">info</span> ลงรับเอกสาร|g\" receive.php)",
+      "Bash(perl -i -pe 's|<i class=\"\"bi bi-search\"\"></i>|<span class=\"\"msi\"\">search</span>|g' cheque.php)",
+      "Bash(perl -i -pe 's|<i class=\"\"bi bi-search\"\"></i>|<span class=\"\"msi\"\">search</span>|g' printcheque.php)",
+      "Bash(perl -i -pe 's|<i class=\"\"bi bi-printer\"\"></i> รายการรอพิมพ์เช็ค|<span class=\"\"msi\"\">print</span> รายการรอพิมพ์เช็ค|g' printcheque.php)",
+      "Bash(perl -i -pe 's|<i class=\"\"bi bi-info-circle\"\"></i> ไม่พบข้อมูล|<span class=\"\"msi\"\">info</span> ไม่พบข้อมูล|g' printcheque.php)",
+      "Bash(perl -i -pe 's|<i class=\"\"bi bi-printer\"\"></i>|<span class=\"\"msi\"\">print</span>|g' printcheque.php)",
+      "Bash(perl -i -pe 's|<span class=\"\"glyphicon glyphicon-user\"\"></span>|<span class=\"\"msi\"\">person</span>|g' printcheque.php)",
+      "Bash(grep -h \"FROM\\\\|INTO\" /c/xampp/htdocs/finance/*.php)",
+      "Bash(grep -oE \"\\(FROM|INTO\\)\\\\s+\\\\`?[a-zA-Z_][a-zA-Z0-9_]*\")",
+      "Bash(gh repo:*)",
+      "Bash(where gh:*)"
+    ]
+  }
+}
