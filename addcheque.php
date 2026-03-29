@@ -31,7 +31,7 @@ function notify_addcheque(mysqli $conn, int $payId, string $chequeNo): void {
                 $actor,
                 $extra
             );
-            moph_send($msgs);
+            moph_broadcast($msgs, $conn);
         }
     } catch (Throwable $e) {
         error_log("MOPH ALERT addcheque exception: " . $e->getMessage());

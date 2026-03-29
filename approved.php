@@ -32,7 +32,7 @@ if ($conn->query($sql)) {
                 $info['amount'],
                 $actor
             );
-            moph_send($msgs);
+            moph_broadcast($msgs, $conn);
         }
     } catch (Throwable $e) {
         error_log("MOPH ALERT approved exception: " . $e->getMessage());

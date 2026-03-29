@@ -210,10 +210,10 @@ if (isset($_GET['do']) && $_GET['do'] === 'download') {
             ]
         ];
 
-        moph_send([
+        moph_broadcast([
             ["type" => "text", "text" => $summaryText],
             ["type" => "flex", "altText" => "สำรองข้อมูลสำเร็จ · " . $filename, "contents" => $bubble],
-        ]);
+        ], $conn);
     } catch (Throwable $e) {
         error_log("MOPH ALERT backup exception: " . $e->getMessage());
     }

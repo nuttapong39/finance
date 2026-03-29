@@ -204,7 +204,7 @@
           (string)$DateInb,    // วันที่ในรูปแบบ dd/mm/YYYY พุทธศักราช
           $recorderName
         );
-        moph_send($msgs);
+        moph_broadcast($msgs, $conn);
       } catch (Throwable $e) {
         error_log("MOPH ALERT payment exception: " . $e->getMessage());
       }

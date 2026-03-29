@@ -5,9 +5,13 @@ declare(strict_types=1);
 require_once __DIR__ . '/moph_alert_config.php';
 
 /**
- * ส่ง MOPH ALERT
+ * ส่ง MOPH ALERT ด้วย client/secret key ที่ระบุ
  */
-function moph_send(array $messages): bool {
+function moph_send(array $messages, string $clientKey = '', string $secretKey = ''): bool {
+    $ck = $clientKey !== '' ? $clientKey : (defined('MOPH_CLIENT_KEY') ? MOPH_CLIENT_KEY : '');
+    $sk = $secretKey !== '' ? $secretKey : (defined('MOPH_SECRET_KEY') ? MOPH_SECRET_KEY : '');
+    if ($ck === '' || $sk === '') return false;
+
     $json = json_encode(['messages' => $messages], JSON_UNESCAPED_UNICODE);
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, MOPH_ALERT_URL);
@@ -16,8 +20,8 @@ function moph_send(array $messages): bool {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Content-Type: application/json',
-        'client-key: ' . MOPH_CLIENT_KEY,
-        'secret-key: '  . MOPH_SECRET_KEY,
+        'client-key: ' . $ck,
+        'secret-key: '  . $sk,
     ]);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, MOPH_ALERT_CONNECT_TIMEOUT);
     curl_setopt($ch, CURLOPT_TIMEOUT,        MOPH_ALERT_TIMEOUT);
@@ -32,6 +36,46 @@ function moph_send(array $messages): bool {
     if ($httpCode >= 200 && $httpCode < 300) return true;
     error_log("MOPH ALERT HTTP {$httpCode}: " . substr((string)$resp, 0, 500));
     return false;
+}
+
+/**
+ * ดึง active tokens ทั้งหมดจาก DB
+ * คืนค่า array of ['client_key'=>string, 'secret_key'=>string, 'name'=>string]
+ */
+function moph_get_active_tokens(mysqli $conn): array {
+    $tokens = [];
+    try {
+        $rs = $conn->query("SELECT name, client_key, secret_key FROM moph_alert_tokens WHERE is_active=1 ORDER BY id ASC");
+        if ($rs) {
+            while ($r = $rs->fetch_assoc()) $tokens[] = $r;
+        }
+    } catch (\Throwable $e) {
+        error_log("moph_get_active_tokens error: " . $e->getMessage());
+    }
+    return $tokens;
+}
+
+/**
+ * Broadcast แจ้งเตือนไปยังทุก active token ใน DB
+ * ถ้าตารางยังไม่มี / DB error → fallback ส่งด้วย config constants
+ * คืนค่า จำนวน token ที่ส่งสำเร็จ
+ */
+function moph_broadcast(array $messages, mysqli $conn): int {
+    $tokens = moph_get_active_tokens($conn);
+
+    // fallback: ถ้าไม่มี token ใน DB ให้ใช้ constants จาก config
+    if (empty($tokens)) {
+        $ok = moph_send($messages);
+        return $ok ? 1 : 0;
+    }
+
+    $success = 0;
+    foreach ($tokens as $tok) {
+        if (moph_send($messages, (string)$tok['client_key'], (string)$tok['secret_key'])) {
+            $success++;
+        }
+    }
+    return $success;
 }
 
 /**

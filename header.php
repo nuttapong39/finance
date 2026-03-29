@@ -291,7 +291,8 @@ body {
     <?= navItem('control.php',    'tune',           'ควบคุมระบบ',   $currentPage) ?>
 
     <div class="snav-label">ระบบ</div>
-    <?= navItem('backup.php', 'backup', 'สำรองข้อมูล', $currentPage) ?>
+    <?= navItem('backup.php',              'backup',               'สำรองข้อมูล',         $currentPage) ?>
+    <?= navItem('moph_alert_settings.php', 'notifications_active', 'ตั้งค่า MOPH ALERT',  $currentPage) ?>
 
     <div class="snav-label">บัญชีผู้ใช้</div>
     <button class="snav-item" onclick="openUserModal()">
