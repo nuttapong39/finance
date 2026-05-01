@@ -1,0 +1,18 @@
+# ── Database credentials ──
+connect_db.php
+
+# ── API credentials (Provider ID / Health ID) ──
+provider_id_config.php
+
+# ── Claude Code session files ──
+.claude/
+
+# ── OS / Editor junk ──
+Thumbs.db
+desktop.ini
+.DS_Store
+*.crdownload
+
+# ── PHP logs ──
+*.log
+error_log
