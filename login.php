@@ -136,10 +136,16 @@ if ($prv === 1) {
     transition:background .35s ease,border-color .35s ease;
   }
   .logo{display:flex;align-items:center;gap:12px}
+  .logo picture{display:block;flex:none;line-height:0}
   .logo-img{width:44px;height:44px;flex:none;object-fit:contain}
   html[data-theme="dark"] .logo-img{background:#fff;border-radius:50%}
   .logo-text{font-size:14px;font-weight:600}
   .logo-text span{display:block;font-size:12px;font-weight:400;color:var(--muted)}
+  /* โลโก้ รพ. ขนาดใหญ่ในแผงซ้าย (ย่อตามความสูงจอ) */
+  .logo-lg{flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:28px}
+  .logo-lg .logo-img{width:clamp(110px, 23vh, 220px);height:auto;aspect-ratio:1}
+  .logo-lg .logo-text{font-size:18px}
+  .logo-lg .logo-text span{font-size:13px}
 
   .brand-body{max-width:450px}
   .eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--accent);
@@ -152,6 +158,12 @@ if ($prv === 1) {
   .features{margin-top:28px;display:flex;flex-direction:column}
   .feature{display:flex;align-items:center;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:14px}
   .feature:last-child{border-bottom:1px solid var(--line)}
+  /* จอกว้าง: จุดเด่น 2 คอลัมน์ ลดความสูงแผงซ้าย */
+  @media (min-width:1200px){
+    .brand-body{max-width:600px}
+    .features{display:grid;grid-template-columns:1fr 1fr;column-gap:28px}
+    .feature:nth-last-child(2){border-bottom:1px solid var(--line)}
+  }
   .feature>svg{flex:none;stroke:var(--accent-2);fill:none}
   .feature small{display:block;color:var(--muted);font-size:12px;font-weight:300;margin-top:2px}
   .brand-foot{font-size:12px;color:var(--muted);font-weight:300}
@@ -243,6 +255,8 @@ if ($prv === 1) {
   /* จอเตี้ย (laptop 1366×768) ให้แผงซ้ายพอดีจอ */
   @media (min-width:981px) and (max-height:820px){
     .brand{padding:28px 60px}
+    .logo-lg{margin-bottom:18px}
+    .logo-lg .logo-img{width:clamp(110px, 21vh, 220px)}
     .eyebrow{margin-bottom:14px}
     h1{font-size:28px}
     .lede{margin-top:10px;font-size:14px;line-height:1.65}
@@ -260,7 +274,8 @@ if ($prv === 1) {
   @media (max-width:980px){
     body{grid-template-columns:1fr}
     .brand{display:none}
-    .m-brand{display:flex}
+    .m-brand{display:flex;flex-direction:column;text-align:center;gap:10px}
+    .m-brand .logo-img{width:96px;height:96px}
     .pane{min-height:100vh;padding:72px 24px 24px}
     .theme-btn{top:16px;right:16px}
   }
@@ -297,8 +312,8 @@ if ($prv === 1) {
 
 <!-- ซ้าย -->
 <aside class="brand">
-  <div class="logo">
-    <img class="logo-img" src="images/logo_ck_256.png" alt="">
+  <div class="logo logo-lg">
+    <picture><source srcset="images/logo_ck_480.webp" type="image/webp"><img class="logo-img" src="images/logo_ck_256.png" alt=""></picture>
     <div class="logo-text"><?= h($brandName) ?><span>สำนักงานปลัดกระทรวงสาธารณสุข</span></div>
   </div>
 
@@ -343,7 +358,7 @@ if ($prv === 1) {
   <div class="pane-inner">
     <!-- แบรนด์แบบย่อ (มือถือ) -->
     <div class="logo m-brand">
-      <img class="logo-img" src="images/logo_ck_256.png" alt="">
+      <picture><source srcset="images/logo_ck_480.webp" type="image/webp"><img class="logo-img" src="images/logo_ck_256.png" alt=""></picture>
       <div class="logo-text"><?= h($brandName) ?><span>สำนักงานปลัดกระทรวงสาธารณสุข</span></div>
     </div>
 
